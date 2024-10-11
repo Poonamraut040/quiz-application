@@ -112,17 +112,16 @@ const QuizReview = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100">
-      <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl mt-10 sm:mt-12 md:mt-10 lg:mt-8 xl:mt-6 mx-2 sm:mx-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4 sm:p-6 md:p-8">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl mt-10 sm:mt-20">
         {/* Review Question */}
-        <div className="bg-blue-50 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 border border-blue-200 shadow-sm">
-          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-black text-center">
+        <div className="bg-blue-50 rounded-lg p-4 mb-6 border border-blue-200 shadow-sm">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-black text-center">
             {currentQuestion.question}
           </h1>
         </div>
 
-        {/* Options Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {currentQuestion.options.map((option) => {
             const isSelected = userSelections[currentQuestion.id] === option;
             const isCorrect = currentQuestion.answer === option;
@@ -130,14 +129,14 @@ const QuizReview = ({
             return (
               <button
                 key={option}
-                className={`py-2 sm:py-4 px-4 sm:px-6 text-left border rounded-lg shadow-sm ${
+                className={`py-3 px-4 text-left border rounded-lg shadow-sm ${
                   isCorrect && isSelected
                     ? "bg-green-200"
                     : !isCorrect && isSelected
                     ? "bg-red-200"
                     : isCorrect
                     ? "bg-green-100"
-                    : "bg-white"
+                    : ""
                 }`}
                 disabled
               >
@@ -151,10 +150,10 @@ const QuizReview = ({
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between mt-6 sm:mt-8">
+        <div className="flex justify-between mt-6">
           {/* Previous Button */}
           <button
-            className="bg-blue-400 text-white py-2 sm:py-3 px-4 sm:px-6 rounded hover:bg-blue-500 transition-all duration-300"
+            className="bg-blue-400 text-white py-2 px-4 sm:py-3 sm:px-6 rounded hover:bg-blue-500 transition-all duration-300"
             onClick={onPrevious}
             disabled={currentQuestionIndex === 0}
           >
@@ -164,23 +163,23 @@ const QuizReview = ({
           {/* Next Button */}
           {currentQuestionIndex < questions.length - 1 && (
             <button
-              className="bg-blue-400 text-white py-2 sm:py-3 px-4 sm:px-6 rounded hover:bg-blue-500 transition-all duration-300"
+              className="bg-blue-400 text-white py-2 px-4 sm:py-3 sm:px-6 rounded hover:bg-blue-500 transition-all duration-300"
               onClick={onNext}
             >
               Next
             </button>
           )}
-        </div>
 
-        {/* Submit Button */}
-        {currentQuestionIndex === questions.length - 1 && (
-          <button
-            onClick={handleBackToHome}
-            className="w-full bg-blue-500 text-white py-2 sm:py-3 rounded mt-4 sm:mt-6 hover:bg-blue-600 transition-all duration-300"
-          >
-            OK, Take me Home
-          </button>
-        )}
+          {/* Submit Button */}
+          {currentQuestionIndex === questions.length - 1 && (
+            <button
+              onClick={handleBackToHome}
+              className="bg-blue-500 text-white py-2 px-4 sm:py-3 sm:px-6 rounded hover:bg-blue-600 transition-all duration-300"
+            >
+              OK, Take me Home
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
